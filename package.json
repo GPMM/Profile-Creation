@@ -1,0 +1,16 @@
+{
+    "name": "tv-perfil",
+    "version": "1.0.0",
+    "description": "Projeto de perfis para TV",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.21.0"
+    },
+    "devDependencies": {},
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

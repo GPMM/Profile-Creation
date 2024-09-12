@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Perfil Smart TV</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Criando seu Perfil Smart TV</h1>
+
+    <form id="profile-form">
+      <label for="name">Nome do Perfil:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="cep">CEP:</label>
+      <input type="text" id="cep" name="cep" placeholder="00000-000">
+
+      <div class="group-options">
+        <input type="checkbox" id="group-profile" name="group-profile">
+        <label for="group-profile">Este é um Perfil de Grupo</label>
+      </div>
+
+      <div class="group-options">
+        <input type="checkbox" id="child-profile" name="child-profile">
+        <label for="child-profile">Este é um Perfil de Criança</label>
+      </div>
+
+
+      <label for="gender">Gênero:</label>
+      <div class="gender-options">
+        <input type="radio" id="male" name="gender" value="M">
+        <label for="male">M</label>
+        <input type="radio" id="female" name="gender" value="F">
+        <label for="female">F</label>
+        <input type="radio" id="nb" name="gender" value="NB">
+        <label for="nb">NB</label>
+      </div>
+
+      <label for="language">Idioma selecionado:</label>
+      <select id="language" name="language">
+        <option value="pt">Português</option>
+        <option value="en">Inglês</option>
+      </select>
+
+      <div class="footer-options">
+        <button type="button" onclick="saveProfile()">Avançar</button>
+        
+      </div>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
