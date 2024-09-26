@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Perfil Smart TV</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Editando seu Perfil Smart TV</h1>
+
+  <div class="content">
+    <div class="container">
+      <form id="edit-profile-form">
+        <input type="text" id="name" name="name" placeholder="Nome do perfil (obrigatório)" required>
+      
+        <!-- Perfil de grupo -->
+        <div class="profile-options">
+          <input type="checkbox" id="group-profile" name="group-profile">
+          <label for="group-profile">Este é um Perfil de Grupo (ex.: família, hóspedes...)</label>
+        </div>
+      
+        <div class="gender-language">
+          <select id="language" name="language">
+            <option value="pt-br">Português</option>
+            <option value="en">Inglês</option>
+          </select>
+      
+          <select id="gender" name="gender">
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+            <option value="NB">Não Binário</option>
+          </select>
+        </div>
+      
+        <div class="Group-classification">
+          <div class="profile-options">
+            <input type="checkbox" id="child-profile" name="child-profile">
+            <label for="child-profile">Este é um Perfil de Criança</label>
+          </div>
+          <div class="ratings">
+            <img id="livre" src="assets/livre.png" alt="Livre" onclick="selectRating('livre')">
+            <img id="10anos" src="assets/10anos.png" alt="10 anos" onclick="selectRating('10anos')">
+            <img id="12anos" src="assets/12anos.png" alt="12 anos" onclick="selectRating('12anos')">
+            <img id="14anos" src="assets/14anos.png" alt="14 anos" onclick="selectRating('14anos')">
+            <img id="16anos" src="assets/16anos.png" alt="16 anos" onclick="selectRating('16anos')">
+            <img id="18anos" src="assets/18anos.png" alt="18 anos" onclick="selectRating('18anos')">
+          </div>
+        </div>
+      
+        <!-- Botões de Acessibilidade -->
+        <div class="accessibility-options">
+          <div class="accessibility-item" onclick="toggleAccessibility('audio-description')">
+            <img id="audio-description" src="assets/audio-description.png" alt="Audiodescrição">
+            <label for="audio-description">Audiodescrição</label>
+          </div>
+          <div class="accessibility-item" onclick="toggleAccessibility('sign-language')">
+            <img id="sign-language" src="assets/sign-language.png" alt="Acessível em Libras">
+            <label for="sign-language">Acessível em Libras</label>
+          </div>
+          <div class="accessibility-item" onclick="toggleAccessibility('closed-caption')">
+            <img id="closed-caption" src="assets/closed-caption.png" alt="Legendas ocultas">
+            <label for="closed-caption">Legendas ocultas</label>
+          </div>
+          <div class="accessibility-item" onclick="toggleAccessibility('dialogue-enhancement')">
+            <img id="dialogue-enhancement" src="assets/dialogue-enhancement.png" alt="Aprimoramento de Diálogo">
+            <label for="dialogue-enhancement">Aprim. de Diálogo</label>
+          </div>
+        </div>
+      
+      </form>
+      
+    </div>
+
+    <!-- Seção de Avatar -->
+    <div class="avatar-section">
+      <label for="avatar-upload">
+        <img id="avatar-preview" src="assets/addprofile.png" alt="Avatar" class="avatar-placeholder">
+      </label>
+      <input type="file" name="avatar" id="avatar-upload" accept="image/*" onchange="previewAvatar(event)" style="display: none;">
+      <label>Escolha seu Avatar:</label>
+    </div>
+
+  <div class="terms-actions">
+    <!-- Seção de Termos -->
+    <div class="terms">
+      <input type="checkbox" id="terms" name="terms" required>
+      <label for="terms">
+        Concordo com a coleta e processamento de meus dados para uma melhor experiência, em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD).
+        <a href="#">Saiba mais.</a>
+      </label>
+    </div>
+
+    <!-- Botões -->
+    <div class="actions">
+      <button type="button" class="btn update" onclick="updateProfile()">Salvar Alterações</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

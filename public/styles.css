@@ -3,15 +3,25 @@ body {
   background-color: #121212;
   color: #ffffff;
   font-family: Arial, sans-serif;
-  margin: 0;
+  margin: 30px;
   padding: 0;
-  text-align: center;
+  font-size: 25px; /* Aumenta o tamanho da fonte para 20px globalmente */
+
 }
 
-.container {
+h1 {
+  color: #ffffff;
+  text-align: left; /* Alinhado à esquerda */
+  margin: 20px 0 20px 20px; /* Margem inferior para espaçamento */
+}
+
+
+/**** index  ****/
+
+.indexContainer {
   text-align: center;
   margin: 20px auto;
-  padding: 20px;
+  padding: 10px;
 }
 
 h1 {
@@ -21,29 +31,30 @@ h1 {
 /* Estilos para os perfis */
 .profiles-container {
   display: flex;
+  text-align: center;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-  padding: 20px;
+  padding: 170px;
 }
 
+/* Estilos para os perfis */
 .profile-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #1e1e1e;
-  border: 2px solid #333;
   padding: 20px;
   border-radius: 8px;
   width: 150px;
-  height: 200px;
+  height: 250px; 
   cursor: pointer;
+  position: relative;
   transition: transform 0.3s ease;
 }
 
 .profile-item:hover {
   transform: scale(1.05);
-  background-color: #333;
+  border: 2px solid #888888;
 }
 
 .profile-avatar {
@@ -51,58 +62,340 @@ h1 {
   height: 100px;
   border-radius: 50%;
   margin-bottom: 10px;
-  border: 2px solid #555;
 }
 
-.add-profile {
-  background-color: #333;
-}
 
 .add-profile:hover {
-  background-color: #444;
+  border: 2px solid #888888;
 }
 
-/* Estilos para o formulário de criação de perfil */
-form label {
-  display: block;
-  margin-top: 10px;
-  color: #ffffff;
+
+/* Estilos para os botões*/
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; 
+  margin-top: 10px; 
 }
 
-form input, form select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  background-color: #333;
-  color: #ffffff;
-  border: 1px solid #555;
-  border-radius: 4px;
+.delete-btn {
+  background-color: #ff0000c5;
 }
 
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #1e88e5;
+.edit-btn {
+  background-color: #1e88e5c7;
+}
+
+.edit-btn, .delete-btn {
+  flex: 1; 
+  margin: 0 5px; 
+  display: none; 
+  padding: 5px 10px;
   color: #ffffff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: 10px; 
 }
 
-button:hover {
+.profile-item:hover .edit-btn,
+.profile-item:hover .delete-btn {
+  display: block; 
+}
+
+/* Container principal para o formulário */
+.container {
+  padding: 20px;
+  width: 85%;
+  border-radius: 40px;
+  display: inline-block;
+  text-align: left;
+  vertical-align: top;
+  margin-bottom: 50px; /* Aumenta o espaçamento do container */
+}
+
+/* Seção de conteúdo (container + avatar) */
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Mantém alinhado ao topo */
+}
+
+
+/* Seção de avatar */
+.avatar-section {
+  display: inline-block;
+  margin-left: 50px;
+  text-align: center;
+}
+
+.avatar-placeholder {
+  width: 150px;
+  height: 150px;
+  background-color: #333;
+  border-radius: 50%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #888;
+  font-size: 30px;
+}
+
+
+/* Estilos para as opções de perfil */
+.profile-options {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Oculta os checkboxes padrão */
+.profile-options  input[type="checkbox"] {
+  display: none; /* Oculta o checkbox padrão */
+}
+
+/* Estilo personalizado para os checkboxes */
+.profile-options  label {
+  position: relative; /* Necessário para posicionar o novo checkbox */
+  padding-left: 35px; /* Espaço para o novo checkbox */
+  cursor: pointer; /* Muda o cursor ao passar o mouse */
+}
+
+.profile-options label:before {
+  content: ''; /* Cria um elemento vazio */
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%); /* Centraliza verticalmente */
+  width: 25px; /* Largura do novo checkbox */
+  height: 25px; /* Altura do novo checkbox */
+  border: 2px solid #ffffff; /* Borda do checkbox */
+  border-radius: 4px; /* Canto arredondado */
+  background-color: #121212; /* Cor de fundo do checkbox */
+  transition: background-color 0.3s; /* Transição suave */
+}
+
+/* Estilo para quando o checkbox está marcado */
+.profile-options input[type="checkbox"]:checked + label:before {
+  background-color: #1e88e5; /* Cor de fundo quando marcado */
+  border-color: #1e88e5; /* Borda quando marcado */
+  content: '✓'; /* Adiciona um "check" quando marcado */
+  color: #ffffff; /* Cor do "check" */
+  text-align: center; /* Centraliza o "check" */
+  line-height: 25px; /* Centraliza verticalmente o "check" */
+  font-size: 20px; /* Tamanho do "check" */
+}
+
+.selected {
+  border: 2px solid #ffffff; /* Altere a cor conforme necessário */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Efeito de sombra opcional */
+}
+
+
+/* Adiciona espaço entre as opções de gênero e idioma */
+.gender-language {
+  display: flex;
+  gap: 20px; /* Espaço entre os dois selects */
+  margin-top: 25px;
+  
+}
+
+
+.child-profile {
+  width: 60%; /* Reduz o campo nome */
+}
+
+.classification {
+  display: flex;
+  align-items: center;
+}
+
+/* Ajusta o layout da classificação e opções */
+.Group-classification {
+  display: flex;
+  justify-content: space-between; /* Coloca os elementos nas extremidades */
+  align-items: center;
+  margin-top: 20px;
+}
+
+.ratings {
+  display: flex;
+}
+
+
+.ratings img {
+  width: 50px; /* Mantém as imagens pequenas */
+  margin-left: 15px;
+  
+}
+
+
+
+/* Mantém o checkbox da opção de grupo como estava */
+.profile-options input {
+  margin-right: 10px;
+}
+
+
+.accessibility-options {
+  margin-top: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.accessibility-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.accessibility-item img {
+  width: 40px; /* Ajuste o tamanho da imagem para ficar semelhante às imagens de faixa etária */
+  height: auto;
+  margin-right: 8px;
+}
+
+.accessibility-item label {
+  font-size: 30px;
+}
+/* Centraliza termos e botões */
+.terms-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px; /* Espaçamento superior maior */
+  gap: 100px; /* Espaçamento entre termos e botões */
+  width: 95%;
+  position: absolute;
+  bottom: 30px; /* Coloca no rodapé */
+}
+
+/* Ajusta o alinhamento do termo de concordância com o checkbox */
+.terms {
+  display: flex;
+  font-size: 18px;
+  align-items: center;
+  gap: 10px; /* Espaço entre o checkbox e o texto */
+}
+
+.terms label {
+  text-align: left;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.terms a {
+  color: #1e88e5;
+  text-decoration: none;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}
+
+/* Oculta o checkbox padrão na seção de termos */
+.terms input[type="checkbox"] {
+  display: none; /* Oculta o checkbox padrão */
+}
+
+/* Estilo personalizado para o checkbox de termos */
+.terms label {
+  position: relative; /* Necessário para posicionar o novo checkbox */
+  padding-left: 35px; /* Espaço para o novo checkbox */
+  cursor: pointer; /* Muda o cursor ao passar o mouse */
+}
+
+.terms label:before {
+  content: ''; /* Cria um elemento vazio */
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%); /* Centraliza verticalmente */
+  width: 25px; /* Largura do novo checkbox */
+  height: 25px; /* Altura do novo checkbox */
+  border: 2px solid #ffffff; /* Borda do checkbox */
+  border-radius: 4px; /* Canto arredondado */
+  background-color: #121212; /* Cor de fundo do checkbox */
+  transition: background-color 0.3s; /* Transição suave */
+}
+
+/* Estilo para quando o checkbox de termos está marcado */
+.terms input[type="checkbox"]:checked + label:before {
+  background-color: #1e88e5; /* Cor de fundo quando marcado */
+  border-color: #1e88e5; /* Borda quando marcado */
+  content: '✓'; /* Adiciona um "check" quando marcado */
+  color: #ffffff; /* Cor do "check" */
+  text-align: center; /* Centraliza o "check" */
+  line-height: 25px; /* Centraliza verticalmente o "check" */
+  font-size: 20px; /* Tamanho do "check" */
+}
+
+
+/* Botões centralizados */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Botões estilizados */
+.actions .btn {
+  background-color: #1e88e5;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.actions .btn.create {
+  white-space: nowrap; /* Impede que o texto quebre */
+}
+
+.actions .btn:hover {
   background-color: #1565c0;
 }
 
-.footer-options button {
-  margin: 10px;
-  padding: 10px 20px;
-  background-color: #555;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
+/* Botão Avançar em verde */
+.actions .advance {
+  background-color: #4CAF50;
 }
 
-.footer-options button:hover {
-  background-color: #777;
+.actions .advance:hover {
+  background-color: #388E3C;
+}
+
+
+/* Centraliza a seção de avatar */
+.avatar-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input[type="text"], select {
+  width: 100%;
+  padding: 8px;
+  background-color: #333;
+  color: #ffffff;
+  border: 1px solid #555;
+  border-radius: 4px;
+  font-size: 25px; /* Aumenta o tamanho da fonte para 30px */
+}
+
+footer {
+  text-align: center;
+  margin-top: 30px;
 }

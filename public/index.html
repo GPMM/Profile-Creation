@@ -7,25 +7,25 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
+  <div class="indexcontainer">
     <h1>Configuração de Perfil</h1>
 
     <!-- Contêiner onde os perfis serão exibidos -->
     <div id="profiles-container" class="profiles-container">
+      <!-- Exemplo de um perfil -->
+      <div class="profile-item">
+        <img src="/assets/profile-avatar.png" alt="Avatar" class="profile-avatar">
+        <h3>Nome do Perfil</h3>
+        <button class="edit-btn">Editar Perfil</button>
+      </div>
+
       <!-- Botão para criar novo perfil -->
       <div class="profile-item add-profile" onclick="window.location.href='criarPerfil.html'">
-        <img src="/assets/profile.png" alt="Adicionar perfil" class="profile-avatar">
+        <img src="/assets/addprofile.png" alt="Adicionar perfil" class="profile-avatar">
         <h3>Adicionar perfil</h3>
       </div>
     </div>
 
-    <div class="footer-options">
-      <button>Audiodescrição</button>
-      <button>Acessível em Libras</button>
-    </div>
-  </div>
-
   <script src="script.js"></script>
-
 </body>
 </html>
