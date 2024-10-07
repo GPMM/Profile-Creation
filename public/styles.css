@@ -399,3 +399,78 @@ footer {
   text-align: center;
   margin-top: 30px;
 }
+
+/* ----- avatar-selection ----- */
+
+.avatar-selection {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  margin: 30px;
+  padding: 0;
+  font-size: 20px; /* Tamanho da fonte específico para esta tela */
+}
+
+.avatar-selection .avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinhado à esquerda */
+}
+
+.avatar-selection .carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px 0;
+  align-items: flex-start; /* Alinhado ao topo */
+}
+
+.avatar-selection .carousel img {
+  width: 80px; /* Tamanho fixo para as imagens */
+  height: 80px; /* Tamanho fixo para as imagens */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.avatar-selection .carousel img:hover {
+  transform: scale(1.1);
+}
+
+.avatar-selection .selected-avatar {
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.avatar-selection #avatar-preview {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-top: 20px;
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #888;
+}
+
+.avatar-selection .actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start; /* Alinhado à esquerda */
+  gap: 10px;
+}
+
+.avatar-selection .btn {
+  background-color: #1e88e5;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.avatar-selection .btn:hover {
+  background-color: #1565c0;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha Seu Avatar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Escolha Seu Avatar</h1>
+    <div class="avatar-section">
+        <h3>Animais</h3>
+        <div class="carousel">
+            <img src="assets/avatar-selection/animal1.jpg" alt="Animal 1" onclick="selectAvatar('animal1.jpg')">
+            <img src="assets/avatar-selection/animal2.jpg" alt="Animal 2" onclick="selectAvatar('animal2.jpg')">
+            <img src="assets/avatar-selection/animal3.jpg" alt="Animal 3" onclick="selectAvatar('animal3.jpg')">
+            <img src="assets/avatar-selection/animal4.jpg" alt="Animal 4" onclick="selectAvatar('animal4.jpg')">
+            <img src="assets/avatar-selection/animal5.jpg" alt="Animal 5" onclick="selectAvatar('animal5.jpg')">
+        </div>
+
+        <h3>Lugares</h3>
+        <div class="carousel">
+            <img src="assets/avatar-selection/place1.jpg" alt="Lugar 1" onclick="selectAvatar('place1.jpg')">
+            <img src="assets/avatar-selection/place2.jpg" alt="Lugar 2" onclick="selectAvatar('place2.jpg')">
+            <img src="assets/avatar-selection/place3.jpg" alt="Lugar 3" onclick="selectAvatar('place3.jpg')">
+            <img src="assets/avatar-selection/place4.jpg" alt="Lugar 4" onclick="selectAvatar('place4.jpg')">
+            <img src="assets/avatar-selection/place5.jpg" alt="Lugar 5" onclick="selectAvatar('place5.jpg')">
+        </div>
+
+        <div id="avatar-preview">Prévia do Avatar</div>
+    </div>
+
+    <div class="actions">
+        <button class="btn" onclick="saveAvatar()">Salvar Avatar</button>
+        <button class="btn" onclick="goBack()">Voltar</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
