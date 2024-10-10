@@ -1,7 +1,7 @@
 [
   {
-    "id": "profile_1727389161515",
-    "name": "ffff",
+    "id": "profile_1728413935904",
+    "name": "Paule mello",
     "isGroup": false,
     "parentalControl": false,
     "gender": "M",
@@ -10,6 +10,7 @@
     "captions": false,
     "signLanguageWindow": false,
     "audioDescription": false,
-    "dialogueEnhancement": false
+    "dialogueEnhancement": false,
+    "avatar": "assets/avatar-selection/animal1.jpg"
   }
 ]

@@ -396,11 +396,29 @@ input[type="text"], select {
 }
 
 footer {
-  text-align: center;
-  margin-top: 30px;
+  position: fixed;
+  bottom: 0;
+  width: 90%;
+  background-color: #121212;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
 }
 
 /* ----- avatar-selection ----- */
+
+.avatar-button {
+  background: none; /* Remove o fundo do botão */
+  border: none; /* Remove a borda do botão */
+  cursor: pointer; /* Muda o cursor para uma mão */
+}
+
+.avatar-button img {
+  width: 150px; /* Define a largura da imagem do botão */
+  height: 150px; /* Define a altura da imagem do botão */
+}
+
 
 .avatar-selection {
   background-color: #121212;
@@ -442,7 +460,7 @@ footer {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-.avatar-selection #avatar-preview {
+.avatar-selection #avatar-gallery {
   width: 150px;
   height: 150px;
   border-radius: 50%;

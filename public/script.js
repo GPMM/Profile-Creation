@@ -9,11 +9,47 @@ function selectRating(ratingId) {
   selectedRating.classList.add('selected'); // Adiciona a classe ao selecionado
 }
 
+// Função para abrir a página de seleção de avatar
+function openAvatarSelection() {
+  window.location.href = 'avatar-selection.html'; // Redireciona para a página de seleção de avatar
+}
+
 // Função para seleção de acessibilidade
 function toggleAccessibility(accessibilityId) {
   const element = document.getElementById(accessibilityId);
   element.classList.toggle('selected'); // Adiciona ou remove a classe ao clicar
 }
+
+let selectedAvatar = null;
+
+// Função para selecionar um avatar
+function selectAvatar(avatarPath) {
+    localStorage.setItem('selectedAvatar', avatarPath);
+    selectedAvatar = avatarPath; // Armazena o avatar selecionado
+    document.getElementById('avatar-preview').innerHTML = `<img src="${avatarPath}" alt="Avatar Selecionado">`;
+}
+
+// Função para salvar o avatar selecionado
+function saveAvatar() {
+    if (!selectedAvatar) {
+        alert("Por favor, selecione um avatar antes de salvar.");
+        return;
+    }
+
+    // Enviar a seleção do avatar para o servidor ou salvar localmente
+    // Aqui, como exemplo, estamos usando localStorage para salvar o avatar
+    localStorage.setItem('selectedAvatar', selectedAvatar);
+    alert("Avatar salvo com sucesso!");
+
+    // Você pode redirecionar o usuário ou executar outra ação aqui
+    window.location.href = 'criarperfil.html'; // Exemplo de redirecionamento para a página de criação de perfil
+}
+
+// Função para voltar para a página anterior
+function goBack() {
+    window.history.back();
+}
+
 
 function editProfile(profileId) {
   // Redireciona para a página de edição, passando o ID do perfil na URL
@@ -201,6 +237,25 @@ function loadProfiles() {
     });
 }
 
+// Função para exibir o preview do avatar na criação do perfil
+function loadSelectedAvatar() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const avatarPath = urlParams.get('avatar'); // Obtém o caminho do avatar da URL
+
+  if (avatarPath) {
+      const avatarPreview = document.getElementById('avatar-preview');
+      avatarPreview.innerHTML = `<img src="${avatarPath}" alt="Avatar Selecionado">`; // Define a imagem de pré-visualização
+      document.getElementById('selected-avatar').value = avatarPath; // Armazena o caminho do avatar no campo oculto
+  }
+}
+
+// Chama a função para carregar o avatar selecionado ao carregar a página
+window.onload = function() {
+  loadProfiles(); // Carrega os perfis
+  loadSelectedAvatar(); // Carrega o avatar selecionado
+};
+
+
 function previewAvatar(event) {
   const file = event.target.files[0];
   const reader = new FileReader();
@@ -230,9 +285,9 @@ function saveProfile() {
   const audioDescription = document.getElementById('audio-description').classList.contains('selected');
   const dialogueEnhancement = document.getElementById('dialogue-enhancement').classList.contains('selected');
 
-  // Captura o avatar
-  const avatarInput = document.getElementById('avatar-upload');
-  const avatarFile = avatarInput.files[0];
+  // Captura o caminho do avatar selecionado
+  const avatarPath = localStorage.getItem('selectedAvatar') || '/assets/profile.png';
+
 
   if (!name || !document.getElementById('terms').checked) {
     alert('Por favor, preencha todos os campos obrigatórios.');
@@ -253,60 +308,30 @@ function saveProfile() {
     signLanguageWindow,
     audioDescription,
     dialogueEnhancement,
+    avatar: avatarPath
   };
 
-  // Converter o arquivo do avatar para base64
-  const reader = new FileReader();
-  reader.onloadend = function() {
-    newProfile.avatar = reader.result; // O resultado é uma string em base64
-    // Enviar perfil ao servidor via POST
-    fetch('/profiles', {
-      method: 'POST',
-      headers: {
+  // Enviar perfil ao servidor via POST
+  fetch('/profiles', {
+    method: 'POST',
+    headers: {
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newProfile)
-    })
-    .then(response => {
-      if (!response.ok) {
+    },
+    body: JSON.stringify(newProfile)
+})
+.then(response => {
+    if (!response.ok) {
         throw new Error('Erro ao salvar o perfil.');
-      }
-      return response.text();
-    })
-    .then(() => {
-      window.location.href = 'index.html';
-    })
-    .catch(error => {
-      console.error('Erro ao salvar o perfil:', error);
-      alert('Erro ao salvar o perfil.');
-    });
-  };
-
-  if (avatarFile) {
-    reader.readAsDataURL(avatarFile); // Lê o arquivo como uma URL de dados
-  } else {
-    // Se não houver arquivo, continua sem o avatar
-    fetch('/profiles', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newProfile)
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Erro ao salvar o perfil.');
-      }
-      return response.text();
-    })
-    .then(() => {
-      window.location.href = 'index.html';
-    })
-    .catch(error => {
-      console.error('Erro ao salvar o perfil:', error);
-      alert('Erro ao salvar o perfil.');
-    });
-  }
+    }
+    return response.text();
+})
+.then(() => {
+    window.location.href = 'index.html';
+})
+.catch(error => {
+    console.error('Erro ao salvar o perfil:', error);
+    alert('Erro ao salvar o perfil.');
+});
 }
 
 // Chama a função para carregar os perfis ao carregar a página
