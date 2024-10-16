@@ -34,7 +34,7 @@
                   <label for="child-profile">Este é um Perfil de Criança</label>
                </div>
                <div class="ratings">
-                  <img id="livre" src="assets/livre.png" alt="Livre" onclick="selectRating('livre')">
+                  <img id="livre" src="assets/Livre.png" alt="Livre" onclick="selectRating('livre')">
                   <img id="10anos" src="assets/10anos.png" alt="10 anos" onclick="selectRating('10anos')">
                   <img id="12anos" src="assets/12anos.png" alt="12 anos" onclick="selectRating('12anos')">
                   <img id="14anos" src="assets/14anos.png" alt="14 anos" onclick="selectRating('14anos')">
@@ -64,13 +64,13 @@
          </div>
          <!-- Seção de Avatar -->
          <div class="avatar-section">
-            <!-- Botão para abrir a página de seleção de avatar -->
-            <button onclick="openAvatarSelection()" class="avatar-button">
-            <img id="selected-avatar" src="/assets/profile.png" alt="Escolher Avatar">
+            <button type="button" class="avatar-button" onclick="openAvatarSelection()">
+               <img id="selected-avatar" src="/assets/profile.png" alt="Escolher Avatar">
             </button>
             <label>Escolha seu Avatar:</label>
-            <input type="hidden" id="selected-avatar" name="selected-avatar"> <!-- Campo oculto para armazenar o avatar escolhido -->
          </div>
+
+
       </div>
       <div class="terms-actions">
          <!-- Seção de Termos -->

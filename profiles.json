@@ -1,7 +1,21 @@
 [
   {
-    "id": "profile_1728413935904",
+    "id": "profile_1729037320633",
     "name": "Paule Macedo",
+    "isGroup": true,
+    "parentalControl": true,
+    "gender": "NB",
+    "language": "en",
+    "ageRating": "18anos",
+    "captions": true,
+    "signLanguageWindow": true,
+    "audioDescription": true,
+    "dialogueEnhancement": true,
+    "avatar": "assets/avatar-selection/animal4.jpg"
+  },
+  {
+    "id": "profile_1729038867479",
+    "name": "Luiz Antonio",
     "isGroup": false,
     "parentalControl": false,
     "gender": "M",
@@ -11,6 +25,6 @@
     "signLanguageWindow": false,
     "audioDescription": false,
     "dialogueEnhancement": false,
-    "avatar": "assets/avatar-selection/animal1.jpg"
+    "avatar": "assets/avatar-selection/animal3.jpg"
   }
 ]

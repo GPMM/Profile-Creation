@@ -70,6 +70,30 @@ function saveProfiles(profiles, res) {
   });
 }
 
+// Endpoint para salvar o ID do usuário atual em currentUser.json
+app.post('/save-current-user', (req, res) => {
+  const { id } = req.body;  // Recebe o ID do usuário do corpo da requisição
+  const filePath = path.join(__dirname, 'currentUser.json');
+
+  // Verifica se o ID foi fornecido
+  if (!id) {
+    return res.status(400).json({ message: 'ID do usuário não fornecido.' });
+  }
+
+  // Cria um objeto com o ID do usuário
+  const currentUser = { id };
+
+  // Escreve o objeto no arquivo currentUser.json
+  fs.writeFile(filePath, JSON.stringify(currentUser, null, 2), (err) => {
+    if (err) {
+      console.error('Erro ao salvar o ID do usuário atual:', err);
+      return res.status(500).json({ message: 'Erro ao salvar o ID do usuário.' });
+    }
+    res.status(200).json({ message: 'ID do usuário salvo com sucesso!' });
+  });
+});
+
+
 
 // Endpoint para adicionar um novo perfil
 app.post('/profiles', (req, res) => {

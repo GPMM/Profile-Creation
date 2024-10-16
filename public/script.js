@@ -22,12 +22,11 @@ function toggleAccessibility(accessibilityId) {
 
 let selectedAvatar = null;
 
-// Função para selecionar um avatar
 function selectAvatar(avatarPath) {
-    localStorage.setItem('selectedAvatar', avatarPath);
-    selectedAvatar = avatarPath; // Armazena o avatar selecionado
-    document.getElementById('avatar-preview').innerHTML = `<img src="${avatarPath}" alt="Avatar Selecionado">`;
+  localStorage.setItem('selectedAvatar', avatarPath); // Salva o avatar no localStorage
+  window.location.href = 'criarPerfil.html'; // Redireciona para a página de criação de perfil
 }
+
 
 // Função para salvar o avatar selecionado
 function saveAvatar() {
@@ -205,6 +204,7 @@ function loadProfiles() {
       profiles.forEach(profile => {
         const profileDiv = document.createElement('div');
         profileDiv.classList.add('profile-item');
+        profileDiv.onclick = () => saveCurrentUser(profile.id); // Salva o ID do perfil clicado
         
         // Adiciona o conteúdo do perfil com o botão de editar
         profileDiv.innerHTML = `
@@ -239,36 +239,12 @@ function loadProfiles() {
 
 // Função para exibir o preview do avatar na criação do perfil
 function loadSelectedAvatar() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const avatarPath = urlParams.get('avatar'); // Obtém o caminho do avatar da URL
-
-  if (avatarPath) {
-      const avatarPreview = document.getElementById('avatar-preview');
-      avatarPreview.innerHTML = `<img src="${avatarPath}" alt="Avatar Selecionado">`; // Define a imagem de pré-visualização
-      document.getElementById('selected-avatar').value = avatarPath; // Armazena o caminho do avatar no campo oculto
-  }
+  const avatarPath = localStorage.getItem('selectedAvatar') || '/assets/profile.png'; // Define um avatar padrão
+  const avatarElement = document.getElementById('selected-avatar');
+  avatarElement.src = avatarPath; // Atualiza a imagem com o avatar selecionado
+  avatarElement.style.borderRadius = '50%'; // Torna a imagem arredondada
 }
 
-// Chama a função para carregar o avatar selecionado ao carregar a página
-window.onload = function() {
-  loadProfiles(); // Carrega os perfis
-  loadSelectedAvatar(); // Carrega o avatar selecionado
-};
-
-
-function previewAvatar(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-
-  reader.onload = function (e) {
-    const avatarPreview = document.getElementById('avatar-preview');
-    avatarPreview.src = e.target.result; // Define a imagem de pré-visualização para o arquivo selecionado
-  };
-
-  if (file) {
-    reader.readAsDataURL(file); // Lê o arquivo como uma URL de dados
-  }
-}
 
 function saveProfile() {
   const name = document.getElementById('name').value;
@@ -287,7 +263,6 @@ function saveProfile() {
 
   // Captura o caminho do avatar selecionado
   const avatarPath = localStorage.getItem('selectedAvatar') || '/assets/profile.png';
-
 
   if (!name || !document.getElementById('terms').checked) {
     alert('Por favor, preencha todos os campos obrigatórios.');
@@ -315,24 +290,47 @@ function saveProfile() {
   fetch('/profiles', {
     method: 'POST',
     headers: {
-        'Content-Type': 'application/json'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(newProfile)
-})
-.then(response => {
+  })
+  .then(response => {
     if (!response.ok) {
-        throw new Error('Erro ao salvar o perfil.');
+      throw new Error('Erro ao salvar o perfil.');
     }
     return response.text();
-})
-.then(() => {
+  })
+  .then(() => {
+    // Limpa o avatar selecionado após salvar
+    localStorage.removeItem('selectedAvatar');
     window.location.href = 'index.html';
-})
-.catch(error => {
+  })
+  .catch(error => {
     console.error('Erro ao salvar o perfil:', error);
     alert('Erro ao salvar o perfil.');
-});
+  });
 }
 
-// Chama a função para carregar os perfis ao carregar a página
-window.onload = loadProfiles;
+function saveCurrentUser(id) {
+  fetch('/save-current-user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id }),  // Envia o ID do perfil clicado
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.message); // Exibe mensagem de sucesso no console
+  })
+  .catch(error => {
+    console.error('Erro ao salvar o ID do usuário:', error);
+  });
+}
+
+// Chama a função para carregar o avatar selecionado ao carregar a página
+window.onload = function() {
+  loadProfiles(); // Carrega os perfis
+  loadSelectedAvatar(); // Carrega o avatar selecionado
+};
+
